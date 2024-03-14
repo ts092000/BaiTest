@@ -55,8 +55,6 @@ export class Controller extends Component {
                     this.scheduleOnce(function(){
                         input.on(Input.EventType.KEY_UP, this.onKeyUp, this);
                     }, 1)
-                    this.scheduleOnce(function(){
-                    }, 1)
                     for (let i = 0; i < 3; i++) this.randomType = randomRangeInt(0, 9);
                     let typeItemAround = this.randomType;
                     console.log(typeItemAround);

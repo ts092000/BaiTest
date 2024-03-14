@@ -71,7 +71,7 @@ export class ItemAroundController extends Component {
     }
 
     public startAnim(type: number): void {
-        this.speed = 0.025
+        this.speed = 0.1;
         this.listItemAround[this.type].getComponent(Sprite).color = Color.WHITE;
         this.scheduleCallBack = function(){
             this.type++;
@@ -88,15 +88,18 @@ export class ItemAroundController extends Component {
                 // this.listItemAround[type].getComponent(Sprite).color = Color.WHITE;
 
                 // this.type = type;
-                this.speed = 1;
+                
+                this.speed = 0.375;
 
                 if (this.type === type) {
-                    this.unschedule(this.scheduleCallBack);
+                    this.unschedule(this.scheduleCallBack, this.speed);
+                    // this.unscheduleAllCallBack(this.scheduleCallBackAfterSpace);
                 }
             }
         };
 
-        this.schedule(this.scheduleCallBack, this.speed)
+        this.schedule(this.scheduleCallBack, this.speed);
+        
     }
 }
 
