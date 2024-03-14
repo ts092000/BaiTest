@@ -36,11 +36,11 @@ export class Column extends Component {
         let arr: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
         this.shuffleArray(arr);
   
-        for (let i = -2; i <= 6; i++) {
+        for (let i = -3; i <= 5; i++) {
             let newNode = new Node();
             this.node.addChild(newNode);
             let itemSpin = newNode.addComponent(ItemSpin);
-            itemSpin.init(this.listSpriteItem[arr[i + 2]], i * 150, arr[i + 2]);
+            itemSpin.init(this.listSpriteItem[arr[i + 3]], i * 150, arr[i + 3]);
             this.listItemSpin.push(newNode);
         };
     }

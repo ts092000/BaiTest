@@ -24,9 +24,9 @@ export class Controller extends Component {
     private column: Column;
 
     private startSpin: boolean = false;
-    private CONFIG_RESULT = [
-        [2, 4, 10], [5, 10, 25], [0, 0, 1], [0, 0, 1], [0, 0, 10], [1, 2, 3]
-    ]
+    // private CONFIG_RESULT = [
+    //     [2, 4, 10], [5, 10, 25], [0, 0, 1], [0, 0, 1], [0, 0, 10], [1, 2, 3]
+    // ]
 
     protected start(): void {
         input.on(Input.EventType.KEY_UP, this.onKeyUp, this);
@@ -51,11 +51,11 @@ export class Controller extends Component {
                     this.scheduleOnce(function(){
                     }, 1)
                     for (let i = 0; i < 3; i++) 
-                    this.randomType[i] = randomRangeInt(1, 9);
+                    this.randomType[i] = randomRangeInt(0, 9);
                     
                     console.log(this.randomType);
+                    // this.column.setIndex(i + 1);
                     for (let i = 0; i < 3; i++) {
-                        this.column.setIndex(i + 1);
                         this.column.startSpin(3000, this.randomType[i]);
                         
                         setTimeout(() => {

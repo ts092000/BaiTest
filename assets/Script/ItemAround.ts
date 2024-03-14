@@ -9,7 +9,7 @@ export class ItemAround extends Component {
     public init(spriteFrame: SpriteFrame, positionX: number, positionY: number, type: ItemType): void {
         this.type = type;
 
-        let width = 80;
+        let width = 70;
         this.node.addComponent(UITransform);
         this.node.getComponent(UITransform).setContentSize(0.35, 0.35);
         
