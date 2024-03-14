@@ -20,7 +20,7 @@ export class Column extends Component {
 
     private index: number = 0;
 
-    private isCheck: boolean = false;
+    public isCheck: boolean = false;
 
     private distance: number = 0;
 
@@ -36,11 +36,10 @@ export class Column extends Component {
         let arr: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8];
         this.shuffleArray(arr);
   
-        for (let i = -2; i <= 3; i++) {
+        for (let i = -2; i <= 6; i++) {
             let newNode = new Node();
             this.node.addChild(newNode);
             let itemSpin = newNode.addComponent(ItemSpin);
-            console.log(ItemSpin);
             itemSpin.init(this.listSpriteItem[arr[i + 2]], i * 150, arr[i + 2]);
             this.listItemSpin.push(newNode);
         };
@@ -49,11 +48,10 @@ export class Column extends Component {
     protected update(dt: number): void {
         if (this.speed <= 0 || !this.tempNode) return;
         if (!this.isCheck && this.speed < 2500) this.speed += 2500 * dt;
-        console.log(this.speed);
 
         if (this.speed >= 2500 && !this.isCheck) {
             this.distance = this.tempNode.position.y < 0 ? 1200 - Math.abs(this.tempNode.position.y) : 900 + this.tempNode.position.y;
-            this.isCheck = true;
+            // this.isCheck = true;
         }
 
         if (this.isCheck) this.speed -= this.distance * dt;
@@ -93,6 +91,10 @@ export class Column extends Component {
 
     public getSpeed(): number {
         return this.speed;
+    }
+
+    public getIsCheck(): boolean {
+        return this.isCheck;
     }
 
     private shuffleArray(array: Array<number>): void {

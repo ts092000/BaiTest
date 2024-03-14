@@ -9,9 +9,9 @@ export class ItemSpin extends Component {
     public init(spriteFrame: SpriteFrame, positionY: number, type: ItemType): void {
         this.type = type;
 
-        let width = 100;
+        let width = 80;
         this.node.addComponent(UITransform);
-        this.node.getComponent(UITransform).setContentSize(0.5, 0.5);
+        this.node.getComponent(UITransform).setContentSize(0.35, 0.35);
         
         this.node.addComponent(Sprite).spriteFrame = spriteFrame;
         this.node.setPosition(0, positionY);
