@@ -13,6 +13,7 @@ export class Controller extends Component {
     @property({type: View})
     private View: View;
 
+    // private randomType: number[] = [];
     private randomType: number[] = [];
     private result: ResultSpin[] = [];
 
@@ -49,8 +50,9 @@ export class Controller extends Component {
                     }, 1)
                     this.scheduleOnce(function(){
                     }, 1)
-                    for (let i = 0; i < 3; i++) this.randomType[i] = randomRangeInt(1, 9);
-
+                    for (let i = 0; i < 3; i++) 
+                    this.randomType[i] = randomRangeInt(1, 9);
+                    
                     console.log(this.randomType);
                     for (let i = 0; i < 3; i++) {
                         this.column.setIndex(i + 1);
