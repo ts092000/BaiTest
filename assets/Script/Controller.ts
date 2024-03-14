@@ -1,8 +1,9 @@
 import { _decorator, Component, EventKeyboard, input, Input, KeyCode, Node, randomRangeInt } from 'cc';
 import { Model } from './Model';
 import { View } from './View';
-import { ItemType, ResultSpin } from './DataType';
+import { ResultSpin } from './DataType';
 import { Column } from './Column';
+import { ItemAroundController } from './ItemAroundController';
 const { ccclass, property } = _decorator;
 
 @ccclass('Controller')
@@ -14,7 +15,7 @@ export class Controller extends Component {
     private View: View;
 
     // private randomType: number[] = [];
-    private randomType: number[] = [];
+    private randomType: number;
     private result: ResultSpin[] = [];
 
     @property({
@@ -22,6 +23,12 @@ export class Controller extends Component {
         tooltip: 'Column spin'
     })
     private column: Column;
+
+    @property({
+        type: ItemAroundController,
+        tooltip: 'ItemAround Controller'
+    })
+    private ItemAroundController: ItemAroundController;
 
     private startSpin: boolean = false;
     // private CONFIG_RESULT = [
@@ -50,39 +57,43 @@ export class Controller extends Component {
                     }, 1)
                     this.scheduleOnce(function(){
                     }, 1)
-                    for (let i = 0; i < 3; i++) 
-                    this.randomType[i] = randomRangeInt(0, 9);
-                    
-                    console.log(this.randomType);
+                    for (let i = 0; i < 3; i++) this.randomType = randomRangeInt(0, 9);
+                    let typeItemAround = this.randomType;
+                    console.log(typeItemAround);
+                    this.ItemAroundController.startAnim(typeItemAround);
+
                     // this.column.setIndex(i + 1);
-                    for (let i = 0; i < 3; i++) {
-                        this.column.startSpin(3000, this.randomType[i]);
+                    this.column.startSpin(3000, this.randomType);
+                    // for (let i = 0; i < 3; i++) {
                         
-                        setTimeout(() => {
+                    //     setTimeout(() => {
 
-                        }, i * 150);
-                    }
+                    //     }, i * 150);
+                    // }
 
-                    for (let i = 0; i < 6; i++) {
+                    for (let i = 0; i < 9; i++) {
                         this.result[i].count = 0;
                         this.result[i].amount = 0;
                     }
 
-                    this.result.forEach((item, index) => {
-                        item.count = this.randomType.filter((num) => num === item.item).length;
-                        // if (item && item.count > 0) item.amount = this.CONFIG_RESULT[item.item][item.count - 1];
-                    })
+                    // this.result.forEach((item, index) => {
+                    //     item.count = this.randomType.filter((num) => num === item.item).length;
+                    //     // if (item && item.count > 0) item.amount = this.CONFIG_RESULT[item.item][item.count - 1];
+                    // })
                     console.log('1');
                 } 
                 else {
+                    // this.unschedule(this.ItemAroundController.scheduleCallBack)
                     this.column.isCheck = true;
+                    this.ItemAroundController.isCheck = true;
                     input.off(Input.EventType.KEY_UP, this.onKeyUp, this);
                     this.scheduleOnce(function(){
                         this.column.isCheck = false;
+                        this.ItemAroundController.isCheck = false;
 
                         this.startSpin = false;
                         input.on(Input.EventType.KEY_UP, this.onKeyUp, this);
-                    }, 3)
+                    }, 3.5)
                     console.log('2');
                 }
         }

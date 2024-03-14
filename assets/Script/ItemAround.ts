@@ -11,7 +11,7 @@ export class ItemAround extends Component {
 
         let width = 70;
         this.node.addComponent(UITransform);
-        this.node.getComponent(UITransform).setContentSize(0.35, 0.35);
+        this.node.getComponent(UITransform).setContentSize(0.25, 0.25);
         
         this.node.addComponent(Sprite).spriteFrame = spriteFrame;
         this.node.setPosition(positionX, positionY);

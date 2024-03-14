@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, SpriteFrame } from 'cc';
+import { _decorator, Color, Component, Node, Sprite, SpriteFrame } from 'cc';
 import { ItemAround } from './ItemAround';
 const { ccclass, property } = _decorator;
 
@@ -12,7 +12,7 @@ export class ItemAroundController extends Component {
 
     private listItemAround: Node[] = [];
 
-    private speed: number = 0;
+    private speed: number = 0.1;
 
     private count: number = 0;
 
@@ -23,6 +23,11 @@ export class ItemAroundController extends Component {
     public isCheck: boolean = false;
 
     private distance: number = 0;
+
+    public type: number = 0;
+
+    public scheduleCallBack: any;
+    public scheduleCallBackAfterSpace: any;
 
     public setIndex(index: number): void {
         this.index = index;
@@ -63,6 +68,35 @@ export class ItemAroundController extends Component {
 
     protected update(dt: number): void {
         
+    }
+
+    public startAnim(type: number): void {
+        this.speed = 0.025
+        this.listItemAround[this.type].getComponent(Sprite).color = Color.WHITE;
+        this.scheduleCallBack = function(){
+            this.type++;
+            this.listItemAround[this.type - 1].getComponent(Sprite).color = Color.GRAY;
+            if (this.type === 18) {
+                this.type = 0;
+            }
+            this.listItemAround[this.type].getComponent(Sprite).color = Color.WHITE;
+            if (this.isCheck) {
+                let newType = this.type % 9;
+                // console.log(this.type);
+                // this.listItemAround[this.type].getComponent(Sprite).color = Color.GRAY;
+
+                // this.listItemAround[type].getComponent(Sprite).color = Color.WHITE;
+
+                // this.type = type;
+                this.speed = 1;
+
+                if (this.type === type) {
+                    this.unschedule(this.scheduleCallBack);
+                }
+            }
+        };
+
+        this.schedule(this.scheduleCallBack, this.speed)
     }
 }
 
